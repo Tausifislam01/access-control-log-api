@@ -31,6 +31,4 @@ Thumbs.db
 .coverage
 htmlcov/
 
-# Migrations (keep __init__.py)
-*/migrations/*.py
-!*/migrations/__init__.py
+system_events.log
