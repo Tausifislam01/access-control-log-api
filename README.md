@@ -63,6 +63,36 @@ Django signals are used to log system events to an external file:
 
 ---
 
+## Logging behavior (`system_events.log`)
+
+The application logs access events (CREATE / DELETE) to a file named `system_events.log`
+located at the project `BASE_DIR`.
+
+### When running locally (without Docker)
+If you run the server using:
+
+```bash
+python manage.py runserver
+```
+
+the `system_events.log` file is created and updated **directly in the project root on your local machine**.
+
+### When running with Docker
+When the application runs inside a Docker container, the log file is written **inside the container filesystem**
+(at `/app/system_events.log`).
+
+To persist logs on your host machine while running with Docker, start the container using a bind mount:
+
+```powershell
+docker run --rm -p 8000:8000 `
+  -v ${PWD}\system_events.log:/app/system_events.log `
+  access-control-log-api
+```
+
+(Adjust the path accordingly if you're not using Windows/PowerShell.)
+
+---
+
 ## Local Setup
 
 ### 1. Create and activate virtual environment
